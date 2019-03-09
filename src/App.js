@@ -63,7 +63,8 @@ class App extends Component {
           <div
             style={{
               backgroundColor: 'gray',
-              margin: '10px'
+              margin: '10px',
+              width: '30%'
             }}
           >
             <div>
