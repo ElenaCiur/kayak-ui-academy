@@ -15,7 +15,8 @@ class App extends Component {
   }
   
   async loadMovies(searchValue) {
-        
+    if (searchValue.length < 3) return
+    
     var newResults = await axios.get(`https://api.themoviedb.org/3/search/movie?api_key=cab2afe8b43cf5386e374c47aeef4fca&language=en-US&query=${searchValue}&page=1&include_adult=false`)
     
     this.setState({
@@ -34,6 +35,7 @@ class App extends Component {
           }}
         >
           <input
+            value={this.state.searchValue}
             onChange={(event) => {
               this.setState({ searchValue: event.target.value})
               this.loadMovies(event.target.value)
@@ -61,8 +63,9 @@ class App extends Component {
         
         {_.map(_.take(this.state.results, 8), (movie) => (
           <div
+            onClick={() => this.setState({ searchValue: movie.title })}
             style={{
-              backgroundColor: 'gray',
+              backgroundColor: '#F6F7FA',
               margin: '10px',
               width: '30%'
             }}
